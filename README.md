@@ -34,7 +34,9 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Describe any challenges encountered while building the app:
+    This is my first application using php, so it may be rough around the edges, 
+    but the functionality should seem intuitive.
 
 ## License
 
