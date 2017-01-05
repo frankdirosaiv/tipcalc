@@ -10,7 +10,7 @@ if (empty($_POST["bill"])) {
 }
 
 if (empty($_POST["custom_tip"])) {
-    $custom_tipErr = "Please enter tip";
+    $custom_tipErr = "Please enter tip percentage";
 } else {
     $custom_tip = test_input($_POST["custom_tip"]);
 }
@@ -78,16 +78,32 @@ input[type=submit]:hover {
 <h2>Tip Calculator</h2>
 <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 Bill Subtotal: $
-<input type="text" name="bill" style="width:50px;"> 
-<span class="warning">*<?php //echo $bill; ?></span> <br>
+<input type="number" name="bill" min="0.01" step="any" style="width:50px;" value="<?php 
+    echo isset($_POST['bill']) ? $_POST['bill'] : '' ?>" /> 
+<span class="warning">*
+<?php 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && empty($bill)) {
+    echo $billErr;
+}
+?>
+</span> <br>
 Tip Percentage: 
-<span class="warning">*<?php //echo $percentErr;?></span>
-<br>
-<input type="radio" name="percent" value="10" id="percent10">10% <br>
-<input type="radio" name="percent" value="15" id="percent15">15% <br>
-<input type="radio" name="percent" value="20" id="percent20">20% <br>
+<span class="warning">*
+<?php 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && empty($custom_tip) && $percent == "custom") {
+    echo $custom_tipErr;
+}
+?>
+</span> <br>
+<?php
+for ($i = 10; $i <= 20; $i=$i+5) {
+?>
+<input type="radio" name="percent" value="<?php echo $i; ?>"> <?php echo $i . "%" ?><br>
+<?php
+}
+?>
 <input type="radio" name="percent" value="custom" id="percentCustom">Custom: 
-<input type="text" name="custom tip" style="width:50px;"> <br>
+<input type="number" name="custom tip" min="0.01" step="any" style="width:50px;"> <br>
 <?php 
     if(isset($percent) && $percent == "custom") {
         $percent = $custom_tip;
@@ -106,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($bill)) {
         echo "For a bill of $ $bill: <br>";
         $tip = round($bill * ($percent * 0.01), 2);
         echo "Tip $" . $tip . "<br>";
-        echo "Total: $" . ($tip + $bill) . "<br> </br>";
+        echo "Total: $" . round(($tip + $bill),2) . "<br> </br>";
         if ($split > 1) {
             echo "Splitting this bill $split ways: <br>";
             echo "Each Tip: $" . round($tip/$split, 2) . "<br>";
@@ -115,6 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($bill)) {
     }
 }
 ?>
+
 
 </body>
 </div>
