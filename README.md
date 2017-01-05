@@ -10,11 +10,11 @@ Time spent: 5 hours spent in total
 
 The following **required** functionality is complete:
 * [x] User can enter a bill amount, choose a tip percentage, and submit the form to see the tip and total values.
-* [ ] Tip percentage choices use a PHP loop to output three radio buttons.
+* [x] Tip percentage choices use a PHP loop to output three radio buttons.
 * [x] PHP code sets reasonable default values for the form.
 * [x] PHP code confirms the presence and correct format of submitted values.
-* [ ] Page indicates any form errors which need to be fixed.
-* [ ] Submitted form values are retained when errors or results are shown.
+* [x] Page indicates any form errors which need to be fixed.
+* [x] Submitted form values are retained when errors or results are shown.
 
 The following **optional** features are implemented:
 * [x] Add support for custom tip percentage
@@ -38,7 +38,7 @@ Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright 2016 Frank DiRosa IV
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
